@@ -2,6 +2,8 @@
 
 var customGUIStyle:GUIStyle;
 
+	var images : Texture2D[];
+
 function Start () {
 
 }
