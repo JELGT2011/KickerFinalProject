@@ -4,6 +4,7 @@ var vert : float;
 var strength : float;
 var startPos : Vector3;
 var direct : Vector3;
+var glass : GlassGUIscript;
 
 function Start () {
 	startPos = transform.position;
@@ -11,8 +12,7 @@ function Start () {
 
 function Update () {
 	if(transform.position.y<-5){
-		transform.position = startPos;
-		rigidbody.velocity = Vector3.zero;
+		glass.setState(4);
 	}
 }
 
@@ -23,4 +23,10 @@ function OnTriggerEnter( col : Collider ){
 		direct.y = vert*strength;
 		rigidbody.AddForce(direct);
 	}
+	
+}
+
+function reset(){
+	transform.position = startPos;
+	rigidbody.velocity = Vector3.zero;
 }
