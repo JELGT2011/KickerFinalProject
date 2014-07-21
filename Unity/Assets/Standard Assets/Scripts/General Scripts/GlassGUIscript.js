@@ -84,8 +84,10 @@ function OnGUI() {
 	GUI.Box(Rect(0, 0, 200, 200), "");
 	GUI.TextArea(Rect(0, 0, 200, 50), "Google Glass", customGUIStyle);
 	GUI.TextArea(Rect(0, 20, 200, 50), "Wind Speed", customGUIStyle);
-	GUI.TextArea(Rect(0, 40, 100, 50), "x: 10mph", customGUIStyle);
-	GUI.TextArea(Rect(100, 40, 100, 50), "y: 12mph", customGUIStyle);
+	//GUI.TextArea(Rect(0, 40, 100, 50), "x: 10mph", customGUIStyle);
+	//GUI.TextArea(Rect(100, 40, 100, 50), "y: 12mph", customGUIStyle);
+	GUI.TextArea(Rect(0, 40, 100, 50), "x: " + Wind_script.windx, customGUIStyle);
+	GUI.TextArea(Rect(100, 40, 100, 50), "y: " + Wind_script.windy, customGUIStyle);
 	//GUI.TextArea(Rect(0, 60, 200, 50), "I'll format it later", customGUIStyle);
 	GUI.DrawTexture(Rect(25,100,100,50),showImage);
     GUI.EndGroup();
