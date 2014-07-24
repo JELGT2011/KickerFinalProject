@@ -7,6 +7,8 @@ var direct : Vector3;
 var glass : GlassGUIscript;
 var correct : soundCor;
 
+var kickType : int;
+
 private var gone : boolean = false;
 private var startRot : Quaternion;
 
@@ -21,26 +23,51 @@ function Update () {
 		glass.setState(4);
 	}
 	if(Input.GetKey("1")&&!gone){
-		leftKick();
+		kickType = 1;
+		// leftKick();
 		gone=true;
 	}
 	if(Input.GetKey("2")&&!gone){
-		rightKick();
+		kickType = 2;
+		// rightKick();
 		gone=true;
 	}
 	if(Input.GetKey("3")&&!gone){
-		forKick();
+		kickType = 3;
+		// forKick();
 		gone=true;
 	}
 	if(Input.GetKey("4")&&!gone){
-		backKick();
+		kickType = 4;
+		// backKick();
 		gone=true;
 	}
 	if(Input.GetKey("5")&&!gone){
-		goodKick();
+		kickType = 5;
+		// goodKick();
 		gone=true;
 	}
-	
+}
+
+function OnCollisionEnter(collision : Collision) {
+	switch (kickType) {
+		case 1:
+			leftKick();
+			break;
+		case 2:
+			rightKick();
+			break;
+		case 3:
+			forKick();
+			break;
+		case 4:
+			backKick();
+			break;
+		case 5:
+			goodKick();
+			break;
+	}
+		
 }
 
 function leftKick(){
