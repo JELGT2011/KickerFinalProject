@@ -10,6 +10,10 @@ var customGUIStyle:GUIStyle;
 	private var select: float;
 	private var state : int;
 	private var showImage : Texture2D;
+	
+	var clock : float;
+	
+	var clockSound : AudioClip;
 
 function Start () {
 	select = 0;
@@ -45,9 +49,16 @@ function Update () {
 			break;
 		case 1:
 			showImage = go;
+			if (Input.GetKeyDown("t")) {
+				state = 2;
+			}
 			if(Input.GetKeyDown("m")){
 				state=4;
 			}
+			break;
+		case 2:
+			clock = Time.time;
+			startClock();
 			break;	
 		case 4:
 			showImage = reset;
@@ -76,6 +87,11 @@ function selection(which: int){
 
 public function kicked(){
 	state =4;
+}
+
+function startClock() {
+	AudioSource.PlayClipAtPoint(clockSound, transform.position);
+	yield WaitForSeconds(0.5f);
 }
 
 function OnGUI() {
