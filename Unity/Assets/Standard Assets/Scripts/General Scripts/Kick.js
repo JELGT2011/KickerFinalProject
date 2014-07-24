@@ -5,6 +5,8 @@ var strength : float;
 var startPos : Vector3;
 var direct : Vector3;
 var glass : GlassGUIscript;
+var correct : soundCor;
+
 private var gone : boolean = false;
 private var startRot : Quaternion;
 
@@ -44,21 +46,25 @@ function Update () {
 function leftKick(){
 	direct = Vector3(-.7,1.2,.3);
 	rigidbody.AddForce(direct*strength);
+	correct.sideSound(.3);
 }
 
 function rightKick(){
 	direct = Vector3(-.6,.8,-.6);
 	rigidbody.AddForce(direct*strength);
+	correct.sideSound(-.6);
 }
 
 function forKick(){
 	direct = Vector3(-.4,1.7,0);
 	rigidbody.AddForce(direct*strength);
+	correct.footForward(1.7);
 }
 
 function backKick(){
 	direct = Vector3(-1.0,.6,0);
 	rigidbody.AddForce(direct*strength);
+	correct.footForward(.6);
 }
 function goodKick(){
 	direct = Vector3(-1.0,1.2,0);
