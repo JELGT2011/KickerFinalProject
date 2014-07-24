@@ -49,23 +49,25 @@ function Update () {
 	}
 }
 
-function OnCollisionEnter(collision : Collision) {
-	switch (kickType) {
-		case 1:
-			leftKick();
-			break;
-		case 2:
-			rightKick();
-			break;
-		case 3:
-			forKick();
-			break;
-		case 4:
-			backKick();
-			break;
-		case 5:
-			goodKick();
-			break;
+function OnTriggerEnter(collision : Collider) {
+	if(collision.tag =="Player"){
+		switch (kickType) {
+			case 1:
+				leftKick();
+				break;
+			case 2:
+				rightKick();
+				break;
+			case 3:
+				forKick();
+				break;
+			case 4:
+				backKick();
+				break;
+			case 5:
+				goodKick();
+				break;
+		}
 	}
 		
 }
@@ -73,36 +75,37 @@ function OnCollisionEnter(collision : Collision) {
 function leftKick(){
 	direct = Vector3(-.7,1.2,.3);
 	rigidbody.AddForce(direct*strength);
-	correct.sideSound(.3);
+	correct.sideSound(.3,0);
 }
 
 function rightKick(){
 	direct = Vector3(-.6,.8,-.6);
 	rigidbody.AddForce(direct*strength);
-	correct.sideSound(-.6);
+	correct.sideSound(-.6,-1);
 }
 
 function forKick(){
 	direct = Vector3(-.4,1.7,0);
 	rigidbody.AddForce(direct*strength);
-	correct.footForward(1.7);
+	correct.footForward(1);
 }
 
 function backKick(){
 	direct = Vector3(-1.0,.6,0);
 	rigidbody.AddForce(direct*strength);
-	correct.footForward(.6);
+	correct.footForward(-1);
 }
 function goodKick(){
 	direct = Vector3(-1.0,1.2,0);
 	rigidbody.AddForce(direct*strength);
+	correct.goodKick();
 }
 
 function reset(){
 	transform.position = startPos;
 	rigidbody.velocity = Vector3.zero;
 	transform.rotation = startRot;
-	gone = false;
+	gone = false;	
 }
 	
 
