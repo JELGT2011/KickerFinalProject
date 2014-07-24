@@ -14,6 +14,8 @@ var customGUIStyle:GUIStyle;
 	var clock : float;
 	
 	var clockSound : AudioClip;
+	
+	var buzzerSound : AudioClip;
 
 function Start () {
 	select = 0;
@@ -90,8 +92,14 @@ public function kicked(){
 }
 
 function startClock() {
-	AudioSource.PlayClipAtPoint(clockSound, transform.position);
-	yield WaitForSeconds(0.5f);
+	if (Time.time - clock < 3.0f) {
+		AudioSource.PlayClipAtPoint(clockSound, transform.position);
+		yield WaitForSeconds(0.5f);
+	} else {
+		AudioSource.PlayClipAtPoint(buzzerSound, transform.position);
+		yield WaitForSeconds(0.5f);
+	}
+	state = 4;
 }
 
 function OnGUI() {
