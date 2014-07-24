@@ -16,10 +16,10 @@ function Start () {
 function Update () {
 	if(forwarding){
 		transform.position = Vector3.Lerp(dopplerS,dopplerE,percent);
-		percent += .1;
+		percent += Time.deltaTime;
 	}
-	//if(transform.position ==startPos)
-		//forwarding=false;
+	if(percent>=1)
+		forwarding=false;
 
 }
 
@@ -36,6 +36,7 @@ function sideSound(magn : float){
 }
 
 function footForward(magn : float){
+	percent =0;
 	transform.position = startPos;
 	if(magn<1.2){
 		dopplerS = startPos + Vector3(5,0,0);
