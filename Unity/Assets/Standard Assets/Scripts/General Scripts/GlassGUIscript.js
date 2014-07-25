@@ -38,7 +38,6 @@ function Update () {
 			if(Input.GetKeyDown("j")){
 				select+=1;
 			}	
-				
 			if(Input.GetKeyDown("k")){
 				select-=1;
 			}
@@ -56,6 +55,7 @@ function Update () {
 				else if(clockEnable==0)
 					clockEnable=1;
 			}
+			
 			if (Input.GetKeyDown("1")) {
 				kick.kickType = 1;
 			}
@@ -71,6 +71,7 @@ function Update () {
 			if (Input.GetKeyDown("5")) {
 				kick.kickType = 5;
 			}
+			
 			if(Input.GetKeyDown("m")){
 				selection(select);
 				state=1;
@@ -113,28 +114,11 @@ function selection(which: int){
 		ambient.playSound(1);
 	else
 		return;
-
-
-}
-
-public function kicked(){
-	state =4;
-}
-
-function startClock() {
-	if (Time.time - clock < 3.0f) {
-		AudioSource.PlayClipAtPoint(clockSound, transform.position);
-		yield WaitForSeconds(0.5f);
-	} else {
-		AudioSource.PlayClipAtPoint(buzzerSound, transform.position);
-		yield WaitForSeconds(0.5f);
-	}
-	state = 4;
 }
 
 function OnGUI() {
+
 	GUI.BeginGroup(Rect(Screen.width-210, 10, 200, 200));
-	
 	GUI.Box(Rect(0, 0, 200, 200), "");
 	GUI.TextArea(Rect(0, 0, 200, 50), "Google Glass", customGUIStyle);
 	GUI.TextArea(Rect(0, 20, 200, 50), "Wind Speed", customGUIStyle);
