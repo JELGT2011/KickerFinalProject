@@ -3,24 +3,15 @@
 var customGUIStyle:GUIStyle;
 
 	var images : Texture2D[];
-	
 	var go: Texture2D;
-	
 	var ambient: Ambience;
-	
 	var reset: Texture2D;
-	
 	var kick: Kick;
-	
 	private var select: float;
-	
 	private var state : int;
-	
 	private var showImage : Texture2D;
 	
 	var clock : float;
-	
-	var clockEnable : int;
 	
 	var clockSound : AudioClip;
 	
@@ -29,7 +20,6 @@ var customGUIStyle:GUIStyle;
 function Start () {
 	select = 0;
 	state= 0;
-	clockEnable = 0;
 }
 
 public function setState(stat : int){
@@ -39,69 +29,46 @@ public function setState(stat : int){
 function Update () {
 	switch(state){
 		case 0:
-			showImage = images[select];
 			if(Input.GetKeyDown("j")){
 				select+=1;
+				
 			}	
 				
 			if(Input.GetKeyDown("k")){
 				select-=1;
-			}
+				
+				}
 			if(select>images.Length-1){
 				select=0;
 			}
-			if(select<0) {
+			if(select<0)
 				select = images.Length-1;
-			}
-			
-			if (Input.GetKeyDown("t")) {
-				clockEnable = 1;
-			}
-			if (Input.GetKeyDown("1")) {
-				kick.kickType = 1;
-			}
-			if (Input.GetKeyDown("2")) {
-				kick.kickType = 2;
-			}
-			if (Input.GetKeyDown("3")) {
-				kick.kickType = 3;
-			}
-			if (Input.GetKeyDown("4")) {
-				kick.kickType = 4;
-			}
-			if (Input.GetKeyDown("5")) {
-				kick.kickType = 5;
-			}
 			if(Input.GetKeyDown("m")){
 				selection(select);
 				state=1;
-			}
+				}
+			showImage = images[select];
 			break;
 		case 1:
 			showImage = go;
-			if (clockEnable == 1) {
-				clock = Time.time;
-				AudioSource.PlayClipAtPoint(clockSound, transform.position);
-				clockEnable = 2;
-			}
-			if (clockEnable == 2 && (Time.time - clock > 3f)) {
-				AudioSource.PlayClipAtPoint(buzzerSound, transform.position);
+			if (Input.GetKeyDown("t")) {
 				state = 2;
 			}
 			if(Input.GetKeyDown("m")){
-				state=2;
+				state=4;
 			}
 			break;
 		case 2:
-			if (Input.GetKeyDown("m")) {
-				state = 4;
-			}
-			break;
+			clock = Time.time;
+			startClock();
+			break;	
 		case 4:
 			showImage = reset;
-			kick.reset();
-			ambient.stop();
-			state = 0;
+			if(Input.GetKeyDown("m")){
+				kick.reset();
+				ambient.stop();
+				state=0;
+			}
 			break;	
 	}
 }
@@ -118,6 +85,21 @@ function selection(which: int){
 		ambient.playSound(4);
 
 
+}
+
+public function kicked(){
+	state =4;
+}
+
+function startClock() {
+	if (Time.time - clock < 3.0f) {
+		AudioSource.PlayClipAtPoint(clockSound, transform.position);
+		yield WaitForSeconds(0.5f);
+	} else {
+		AudioSource.PlayClipAtPoint(buzzerSound, transform.position);
+		yield WaitForSeconds(0.5f);
+	}
+	state = 4;
 }
 
 function OnGUI() {
