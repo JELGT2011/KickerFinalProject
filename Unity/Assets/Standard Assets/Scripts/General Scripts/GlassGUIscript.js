@@ -3,13 +3,15 @@
 var customGUIStyle:GUIStyle;
 
 	var images : Texture2D[];
+	var arrows : Texture2D[];
 	var go: Texture2D;
 	var ambient: Ambience;
+	var xSign : Texture2D;
 	var reset: Texture2D;
 	var kick: Kick;
 	private var select: float;
-	private var state : int;
-	private var showImage : Texture2D;
+	var state : int;
+	var showImage : Texture2D;
 	
 	var clock : float;
 	
@@ -35,7 +37,6 @@ function Update () {
 			showImage = images[select];
 			if(Input.GetKeyDown("j")){
 				select+=1;
-				
 			}	
 				
 			if(Input.GetKeyDown("k")){
@@ -50,7 +51,10 @@ function Update () {
 			}
 			
 			if (Input.GetKeyDown("t")) {
-				clockEnable = 1;
+				if(clockEnable==1)
+					clockEnable = 0;
+				else if(clockEnable==0)
+					clockEnable=1;
 			}
 			if (Input.GetKeyDown("1")) {
 				kick.kickType = 1;
@@ -81,6 +85,8 @@ function Update () {
 			}
 			if (clockEnable == 2 && (Time.time - clock > 3f)) {
 				AudioSource.PlayClipAtPoint(buzzerSound, transform.position);
+				showImage = xSign;
+				state=2;
 			}
 			if(Input.GetKeyDown("m")){
 				state=2;
@@ -92,7 +98,6 @@ function Update () {
 			}
 			break;	
 		case 4:
-			showImage = reset;
 			kick.reset();
 			ambient.stop();
 			state = 0;
@@ -106,10 +111,8 @@ function selection(which: int){
 		ambient.playSound(0);
 	else if(which==1)
 		ambient.playSound(1);
-	
-	
-	else if(which==4)
-		ambient.playSound(4);
+	else
+		return;
 
 
 }

@@ -1,8 +1,8 @@
 ﻿#pragma strict
 
 	public var stadium : AudioSource;
-	public var music: AudioSource ;
-	public var heartBeat: AudioSource;
+	public var annoyance: AudioSource ;
+	
 	// Use this for initialization
 	function Start () {
 	
@@ -21,7 +21,5 @@
 		if(which==0)
 			stadium.Play();
 		else if(which==1)
-			music.Play ();
-		else if(which==4)
-			heartBeat.Play();
-			}
+			annoyance.Play ();
+}
