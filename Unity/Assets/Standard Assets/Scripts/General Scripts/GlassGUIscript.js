@@ -22,6 +22,10 @@ var customGUIStyle:GUIStyle;
 	var buzzerSound : AudioClip;
 	
 	var resetSound : AudioClip;
+	
+	var icekicker : AudioSource;
+	
+	var footballSnap : AudioSource;
 
 function Start () {
 	select = 0;
@@ -76,7 +80,12 @@ function Update () {
 			
 			if(Input.GetKeyDown("m")){
 				selection(select);
+				footballSnap.Play();
 				state=1;
+			}
+			if(Input.GetKeyDown("i")){
+				icekicker.Play();
+				state =2;
 			}
 			break;
 		case 1:
@@ -96,13 +105,13 @@ function Update () {
 			}
 			break;
 		case 2:
+			ambient.stop();
 			if (Input.GetKeyDown("m")) {
 				state = 4;
 			}
 			break;	
 		case 4:
 			kick.reset();
-			ambient.stop();
 			AudioSource.PlayClipAtPoint(resetSound, transform.position);
 			state = 0;
 			break;	

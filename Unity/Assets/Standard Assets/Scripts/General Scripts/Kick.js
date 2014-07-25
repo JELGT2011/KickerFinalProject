@@ -13,6 +13,7 @@ private var gone : boolean = false;
 private var startRot : Quaternion;
 
 function Start () {
+	kickType = 5;
 	startPos = transform.position;
 	startRot = transform.rotation;
 }
@@ -87,7 +88,8 @@ function reset(){
 	transform.position = startPos;
 	rigidbody.velocity = Vector3.zero;
 	transform.rotation = startRot;
-	gone = false;	
+	gone = false;
+	kickType = 5;	
 }
 	
 
