@@ -19,10 +19,6 @@ function Start () {
 }
 
 function Update () {
-
-	if(transform.position.y<-5||(rigidbody.velocity.x>-1 && gone)){
-		glass.setState(4);
-	}
 	
 }
 
