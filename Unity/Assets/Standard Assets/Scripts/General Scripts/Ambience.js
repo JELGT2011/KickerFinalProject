@@ -14,7 +14,8 @@
 	}
 	
 	function stop(){
-		audio.Stop();
+		annoyance.Stop();
+		stadium.Stop();
 	}
 
 	public function playSound(which: int){
@@ -22,4 +23,5 @@
 			stadium.Play();
 		else if(which==1)
 			annoyance.Play ();
+			stadium.Play();
 }
