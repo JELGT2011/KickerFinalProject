@@ -20,6 +20,8 @@ var customGUIStyle:GUIStyle;
 	var clockEnable : int;
 	
 	var buzzerSound : AudioClip;
+	
+	var resetSound : AudioClip;
 
 function Start () {
 	select = 0;
@@ -101,6 +103,7 @@ function Update () {
 		case 4:
 			kick.reset();
 			ambient.stop();
+			AudioSource.PlayClipAtPoint(resetSound, transform.position);
 			state = 0;
 			break;	
 	}
